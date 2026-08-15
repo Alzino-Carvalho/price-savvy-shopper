@@ -26,7 +26,7 @@ export const BASE_POR_FAMILIA: Record<Familia, { rotulo: string; multiplicador: 
 };
 
 export function unidadePorId(id: UnidadeId) {
-  return UNIDADES.find((u) => u.id === id) ?? UNIDADES[0];
+  return UNIDADES.find((u) => u.id === id) ?? UNIDADES[0]!;
 }
 
 export type Produto = {
@@ -86,8 +86,8 @@ export function calcular(produtos: Produto[], rotulos: string[]): {
   }
 
   const ordenados = [...validos].sort((a, b) => (a.precoBase ?? 0) - (b.precoBase ?? 0));
-  const melhor = ordenados[0];
-  const pior = ordenados[ordenados.length - 1];
+  const melhor = ordenados[0]!;
+  const pior = ordenados[ordenados.length - 1]!;
   const economia =
     pior.precoBase && melhor.precoBase
       ? ((pior.precoBase - melhor.precoBase) / pior.precoBase) * 100
