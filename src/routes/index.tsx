@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 import logo from "@/assets/logo-e-preco-hein.jpg.asset.json";
 
@@ -52,12 +52,12 @@ function Index() {
           Embalagens com tamanhos diferentes confundem qualquer um. O É Preço Hein calcula o
           preço por unidade, grama, quilo, litro ou mililitro e mostra o vencedor na hora.
         </p>
-        <button
-          type="button"
+        <Link
+          to="/comparar"
           className="mt-8 inline-flex items-center justify-center rounded-full bg-primary px-8 py-3 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
         >
           Comparar produtos
-        </button>
+        </Link>
       </section>
 
       <section className="mx-auto grid max-w-4xl gap-4 px-6 pb-20 sm:grid-cols-3">
