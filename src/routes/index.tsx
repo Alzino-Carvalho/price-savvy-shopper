@@ -1,24 +1,73 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import logo from "@/assets/logo-e-preco-hein.jpg.asset.json";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "É Preço Hein — qual produto sai mais barato?" },
+      {
+        name: "description",
+        content:
+          "Compare produtos com quantidades diferentes e veja na hora qual é o mais barato por unidade, grama, quilo, litro ou mililitro.",
+      },
+      { property: "og:title", content: "É Preço Hein" },
+      {
+        property: "og:description",
+        content: "Compare preços por unidade e economize no mercado.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const beneficios = [
+  {
+    titulo: "Compare em segundos",
+    texto: "Informe preço e quantidade de cada produto e veja o valor por unidade base.",
+  },
+  {
+    titulo: "Simples de usar",
+    texto: "Feito para o corredor do mercado: poucos toques, resultado claro.",
+  },
+  {
+    titulo: "Funciona no celular",
+    texto: "Android, iPhone ou navegador — sem instalar nada para começar.",
+  },
+];
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="min-h-screen bg-background">
+      <section className="mx-auto flex max-w-3xl flex-col items-center px-6 py-16 text-center">
+        <img
+          src={logo.url}
+          alt="É Preço Hein — calculadora com lupa sobre o preço R$ 5,90"
+          className="w-full max-w-md"
+        />
+        <h1 className="mt-6 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          Qual produto sai mais barato de verdade?
+        </h1>
+        <p className="mt-4 max-w-xl text-base text-muted-foreground">
+          Embalagens com tamanhos diferentes confundem qualquer um. O É Preço Hein calcula o
+          preço por unidade, grama, quilo, litro ou mililitro e mostra o vencedor na hora.
+        </p>
+        <button
+          type="button"
+          className="mt-8 inline-flex items-center justify-center rounded-full bg-primary px-8 py-3 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+        >
+          Comparar produtos
+        </button>
+      </section>
+
+      <section className="mx-auto grid max-w-4xl gap-4 px-6 pb-20 sm:grid-cols-3">
+        {beneficios.map((b) => (
+          <div key={b.titulo} className="rounded-2xl border border-border bg-card p-5 text-left">
+            <h2 className="text-base font-semibold text-card-foreground">{b.titulo}</h2>
+            <p className="mt-2 text-sm text-muted-foreground">{b.texto}</p>
+          </div>
+        ))}
+      </section>
+    </main>
   );
 }
