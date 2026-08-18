@@ -68,6 +68,18 @@ function Index() {
           </div>
         ))}
       </section>
+
+      <footer className="border-t border-border px-6 py-8 text-center text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <Link to="/privacidade" className="hover:text-foreground hover:underline">
+            Política de Privacidade
+          </Link>
+          <Link to="/termos" className="hover:text-foreground hover:underline">
+            Termos de Uso
+          </Link>
+        </div>
+        <p className="mt-4">© 2026 É Preço Hein</p>
+      </footer>
     </main>
   );
 }
