@@ -6,5 +6,5 @@ export default defineConfig({
     prerender: { enabled: true, crawlLinks: true },
     spa: { enabled: true },
   },
-  nitro: isLovable ? undefined : { preset: "static" },
+  nitro: isLovable ? undefined : false,
 });
