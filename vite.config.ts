@@ -9,7 +9,7 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 // Dentro do ambiente Lovable (preview/publicação) o build continua igual: SSR no Worker.
 // Fora dele (seu computador, `npm run build`) o build vira 100% estático para o Capacitor:
 // nitro desligado + prerender de todas as rotas em dist/client.
-const isLovableBuild = process.env.LOVABLE_SANDBOX === "1" || !!process.env.SANDBOX;
+const isLovableBuild = process.env["LOVABLE_SANDBOX"] === "1" || !!process.env["SANDBOX"];
 
 export default defineConfig({
   tanstackStart: {
@@ -19,5 +19,5 @@ export default defineConfig({
     // Gera HTML estático de cada rota (necessário para empacotar com Capacitor).
     prerender: isLovableBuild ? undefined : { enabled: true, crawlLinks: true },
   },
-  nitro: isLovableBuild ? undefined : false,
+  ...(isLovableBuild ? {} : { nitro: false as const }),
 });
