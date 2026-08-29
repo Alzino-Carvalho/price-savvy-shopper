@@ -20,9 +20,9 @@ export const BASE_POR_FAMILIA: Record<Familia, { rotulo: string; multiplicador: 
   // preço por 1 unidade
   unidade: { rotulo: "unidade", multiplicador: 1 },
   // preço por 1 kg (1000 g)
-  massa: { rotulo: "quilo (kg)", multiplicador: 1000 },
+  massa: { rotulo: "kg", multiplicador: 1000 },
   // preço por 1 L (1000 ml)
-  volume: { rotulo: "litro (L)", multiplicador: 1000 },
+  volume: { rotulo: "L", multiplicador: 1000 },
 };
 
 export function unidadePorId(id: UnidadeId) {

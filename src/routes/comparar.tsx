@@ -219,7 +219,7 @@ function Comparar() {
           {vencedor && vencedor.precoBase !== null ? (
             <>
               <p className="text-base font-bold text-foreground">
-                {vencedor.nome} é o mais barato
+                {vencedor.nome} é mais barato por {vencedor.rotuloBase}
               </p>
               <p className="mt-0.5 text-sm text-muted-foreground">
                 {formatarMoeda(vencedor.precoBase)} por {vencedor.rotuloBase}
@@ -228,6 +228,9 @@ function Comparar() {
                       maximumFractionDigits: 1,
                     })}%`
                   : ""}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                O cálculo divide o preço pela quantidade convertida para uma unidade comum.
               </p>
             </>
           ) : (
