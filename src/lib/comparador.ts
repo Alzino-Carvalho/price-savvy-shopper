@@ -9,20 +9,20 @@ export const UNIDADES: {
   /** quantos da unidade base essa unidade representa */
   fator: number;
 }[] = [
-  { id: "un", rotulo: "un", familia: "unidade", fator: 1 },
-  { id: "g", rotulo: "g", familia: "massa", fator: 1 },
-  { id: "kg", rotulo: "kg", familia: "massa", fator: 1000 },
-  { id: "ml", rotulo: "ml", familia: "volume", fator: 1 },
-  { id: "l", rotulo: "L", familia: "volume", fator: 1000 },
+  { id: "un", rotulo: "Unidade", familia: "unidade", fator: 1 },
+  { id: "g", rotulo: "Grama (g)", familia: "massa", fator: 1 },
+  { id: "kg", rotulo: "Quilograma (kg)", familia: "massa", fator: 1000 },
+  { id: "ml", rotulo: "Mililitro (ml)", familia: "volume", fator: 1 },
+  { id: "l", rotulo: "Litro (L)", familia: "volume", fator: 1000 },
 ];
 
 export const BASE_POR_FAMILIA: Record<Familia, { rotulo: string; multiplicador: number }> = {
   // preço por 1 unidade
   unidade: { rotulo: "unidade", multiplicador: 1 },
   // preço por 1 kg (1000 g)
-  massa: { rotulo: "kg", multiplicador: 1000 },
+  massa: { rotulo: "quilo (kg)", multiplicador: 1000 },
   // preço por 1 L (1000 ml)
-  volume: { rotulo: "litro", multiplicador: 1000 },
+  volume: { rotulo: "litro (L)", multiplicador: 1000 },
 };
 
 export function unidadePorId(id: UnidadeId) {
