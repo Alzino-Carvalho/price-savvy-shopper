@@ -194,6 +194,24 @@ function Comparar() {
           <Plus className="h-4 w-4" aria-hidden="true" />
           Adicionar produto
         </button>
+
+        <section className="mt-8 rounded-2xl border border-border bg-card p-4">
+          <h2 className="text-base font-bold text-card-foreground">Como calculamos?</h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            O É Preço Hein converte a quantidade de cada produto para uma unidade comum e
+            divide o preço por essa quantidade. Assim, todos os produtos passam a ser
+            comparados pela mesma medida:
+          </p>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
+            <li>Produtos por peso: preço por quilo (kg)</li>
+            <li>Produtos por volume: preço por litro (L)</li>
+            <li>Produtos por unidade: preço por unidade</li>
+          </ul>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            Exemplo: um pacote de 500 g por R$ 12,90 custa R$ 25,80 por quilo. O produto com
+            o menor valor na mesma unidade-base é o mais barato.
+          </p>
+        </section>
       </div>
 
       <div className="fixed inset-x-0 bottom-0 border-t border-border bg-card/95 backdrop-blur">
