@@ -1,0 +1,67 @@
+name: Build Android (APK de teste)
+
+# Roda automaticamente a cada push na branch main, e também pode ser
+# disparado manualmente na aba "Actions" do GitHub (botão "Run workflow").
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar Bun (gerenciador de pacotes usado no projeto)
+        uses: oven-sh/setup-bun@v2
+
+      - name: Instalar Java (necessário para compilar Android)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Instalar o Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Instalar dependências do projeto
+        run: bun install
+
+      - name: Gerar o build web de produção
+        run: bun run build
+
+      - name: Adicionar a plataforma Android ao projeto (Capacitor)
+        run: npx cap add android || npx cap sync android
+
+      - name: Sincronizar os arquivos web dentro do projeto Android
+        run: npx cap sync android
+
+      - name: Dar permissão de execução ao Gradle
+        run: chmod +x android/gradlew
+
+      - name: Compilar um APK de teste (assinado com chave de debug, só para instalar e testar no celular)
+        working-directory: android
+        run: ./gradlew assembleDebug
+
+      - name: Disponibilizar o APK para download
+        uses: actions/upload-artifact@v4
+        with:
+          name: e-preco-hein-debug-apk
+          path: android/app/build/outputs/apk/debug/*.apk
+
+# IMPORTANTE:
+# Este workflow gera um APK de DEBUG — ótimo para instalar no seu celular
+# Android e testar agora mesmo, mas ele NÃO pode ser enviado à Google Play
+# (a Play Store exige um pacote .aab assinado com uma chave de release própria
+# sua, que ainda não existe neste projeto).
+#
+# Quando estiver pronto para enviar de verdade à Play Store, o próximo passo é:
+# 1. Gerar uma chave de assinatura de release (keystore) — um comando único,
+#    que eu te ajudo a rodar quando chegar a hora.
+# 2. Guardar essa chave como "Secrets" neste repositório do GitHub (nunca
+#    direto no código).
+# 3. Trocar o passo "assembleDebug" acima por "bundleRelease" com a
+#    configuração de assinatura apontando para essa chave.
+# Isso é só o passo seguinte — não precisa se preocupar com isso agora.
