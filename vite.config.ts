@@ -11,5 +11,11 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    // Gera HTML estático para todas as rotas (necessário para empacotar com Capacitor).
+    prerender: { enabled: true, crawlLinks: true },
+    // Fallback SPA: qualquer rota não pré-renderizada carrega o app no cliente.
+    spa: { enabled: true },
   },
+  // Fora do ambiente Lovable (build local), gera saída 100% estática — sem Worker.
+  nitro: { preset: "static" },
 });
